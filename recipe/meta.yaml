@@ -6,24 +6,24 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/napari-owncloud-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/napari-owncloud-{{ version }}.tar.gz
   sha256: d5992c6cbd7ad99cd3ba9fc59068288e7c330cb518c14de0e319e5ebc7312c6a
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - napari-plugin-engine >=0.1.4
     - napari-tools-menu
     - numpy
     - pyocclient
-    - python >=3.8
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/haesleinhuepf/napari-owncloud
